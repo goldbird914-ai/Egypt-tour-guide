@@ -1,0 +1,132 @@
+package com.example.data.local
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.example.data.Monument
+
+@Entity(tableName = "cached_monuments")
+data class MonumentEntity(
+    @PrimaryKey
+    val id: String,
+    val nameAr: String,
+    val nameEn: String,
+    val subtitleAr: String,
+    val subtitleEn: String,
+    val eraAr: String,
+    val eraEn: String,
+    val cityAr: String,
+    val cityEn: String,
+    val latitude: Double,
+    val longitude: Double,
+    val rating: Float,
+    val durationMin: Int,
+    val ticketPriceEgpAdult: Int,
+    val ticketPriceEgpStudent: Int,
+    val ticketPriceForeignerAdult: Int,
+    val openingHoursAr: String,
+    val openingHoursEn: String,
+    val shortDescAr: String,
+    val shortDescEn: String,
+    val detailedHistoryAr: String,
+    val detailedHistoryEn: String,
+    val highlightsSerialized: String,
+    val highlightsEnSerialized: String,
+    val visitorTipsSerialized: String,
+    val visitorTipsEnSerialized: String,
+    val audioDurationSeconds: Int,
+    val audioScriptAr: String,
+    val audioScriptEn: String,
+    val arArtifactId: String?,
+    val funFactAr: String,
+    val funFactEn: String,
+    val eraCategory: String = "pharaonic",
+    val approximateYearBce: Int = -2500,
+    val yearDisplayAr: String = "",
+    val yearDisplayEn: String = "",
+    val cachedTimestamp: Long = System.currentTimeMillis()
+) {
+    fun toMonument(drawableResId: Int?): Monument {
+        return Monument(
+            id = id,
+            nameAr = nameAr,
+            nameEn = nameEn,
+            subtitleAr = subtitleAr,
+            subtitleEn = subtitleEn,
+            eraAr = eraAr,
+            eraEn = eraEn,
+            cityAr = cityAr,
+            cityEn = cityEn,
+            latitude = latitude,
+            longitude = longitude,
+            rating = rating,
+            durationMin = durationMin,
+            ticketPriceEgpAdult = ticketPriceEgpAdult,
+            ticketPriceEgpStudent = ticketPriceEgpStudent,
+            ticketPriceForeignerAdult = ticketPriceForeignerAdult,
+            openingHoursAr = openingHoursAr,
+            openingHoursEn = openingHoursEn,
+            shortDescAr = shortDescAr,
+            shortDescEn = shortDescEn,
+            detailedHistoryAr = detailedHistoryAr,
+            detailedHistoryEn = detailedHistoryEn,
+            highlightsAr = if (highlightsSerialized.isBlank()) emptyList() else highlightsSerialized.split(";;;"),
+            highlightsEn = if (highlightsEnSerialized.isBlank()) emptyList() else highlightsEnSerialized.split(";;;"),
+            visitorTipsAr = if (visitorTipsSerialized.isBlank()) emptyList() else visitorTipsSerialized.split(";;;"),
+            visitorTipsEn = if (visitorTipsEnSerialized.isBlank()) emptyList() else visitorTipsEnSerialized.split(";;;"),
+            audioDurationSeconds = audioDurationSeconds,
+            audioScriptAr = audioScriptAr,
+            audioScriptEn = audioScriptEn,
+            drawableResId = drawableResId,
+            arArtifactId = arArtifactId,
+            funFactAr = funFactAr,
+            funFactEn = funFactEn,
+            eraCategory = eraCategory,
+            approximateYearBce = approximateYearBce,
+            yearDisplayAr = yearDisplayAr,
+            yearDisplayEn = yearDisplayEn
+        )
+    }
+
+    companion object {
+        fun fromMonument(monument: Monument): MonumentEntity {
+            return MonumentEntity(
+                id = monument.id,
+                nameAr = monument.nameAr,
+                nameEn = monument.nameEn,
+                subtitleAr = monument.subtitleAr,
+                subtitleEn = monument.subtitleEn,
+                eraAr = monument.eraAr,
+                eraEn = monument.eraEn,
+                cityAr = monument.cityAr,
+                cityEn = monument.cityEn,
+                latitude = monument.latitude,
+                longitude = monument.longitude,
+                rating = monument.rating,
+                durationMin = monument.durationMin,
+                ticketPriceEgpAdult = monument.ticketPriceEgpAdult,
+                ticketPriceEgpStudent = monument.ticketPriceEgpStudent,
+                ticketPriceForeignerAdult = monument.ticketPriceForeignerAdult,
+                openingHoursAr = monument.openingHoursAr,
+                openingHoursEn = monument.openingHoursEn,
+                shortDescAr = monument.shortDescAr,
+                shortDescEn = monument.shortDescEn,
+                detailedHistoryAr = monument.detailedHistoryAr,
+                detailedHistoryEn = monument.detailedHistoryEn,
+                highlightsSerialized = monument.highlightsAr.joinToString(";;;"),
+                highlightsEnSerialized = monument.highlightsEn.joinToString(";;;"),
+                visitorTipsSerialized = monument.visitorTipsAr.joinToString(";;;"),
+                visitorTipsEnSerialized = monument.visitorTipsEn.joinToString(";;;"),
+                audioDurationSeconds = monument.audioDurationSeconds,
+                audioScriptAr = monument.audioScriptAr,
+                audioScriptEn = monument.audioScriptEn,
+                arArtifactId = monument.arArtifactId,
+                funFactAr = monument.funFactAr,
+                funFactEn = monument.funFactEn,
+                eraCategory = monument.eraCategory,
+                approximateYearBce = monument.approximateYearBce,
+                yearDisplayAr = monument.yearDisplayAr,
+                yearDisplayEn = monument.yearDisplayEn
+            )
+        }
+    }
+}

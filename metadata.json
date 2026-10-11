@@ -1,0 +1,6 @@
+{
+  "name": "أم الدنيا",
+  "description": "دليل سياحي وتاريخي شامل لمصر مع خرائط ومسارات أثرية دقيقة وكاميرا واقع معزز (AR) للمعالم الفرعونية والإسلامية",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
